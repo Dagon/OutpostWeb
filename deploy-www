@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DEST=/var/www
+
+echo "copying www/ to $DEST/"
+rsync -av www/ "$DEST/"
+
+echo "ensuring dir ownership for images" 
+for DIR in "$DEST/html/cams/pics" "$DEST/html/cams/pics/small" "$DEST/html/cams/__pycache__" ; do
+    mkdir -p "$DIR"
+    chown apache.apache "$DIR"
+done
